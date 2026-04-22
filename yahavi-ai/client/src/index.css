@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply antialiased;
+  }
+
+  /* Thin scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-gray-600;
+  }
+}
+
+@layer utilities {
+  .animate-fadeInUp {
+    animation: fadeInUp 0.25s ease-out forwards;
+  }
+
+  .section-delay-1 { animation-delay: 0.05s; opacity: 0; }
+  .section-delay-2 { animation-delay: 0.12s; opacity: 0; }
+  .section-delay-3 { animation-delay: 0.19s; opacity: 0; }
+  .section-delay-4 { animation-delay: 0.26s; opacity: 0; }
+  .section-delay-5 { animation-delay: 0.33s; opacity: 0; }
+}
