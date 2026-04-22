@@ -3,14 +3,16 @@ import Sidebar from './components/Sidebar';
 import ChatArea from './components/ChatArea';
 import InputBar from './components/InputBar';
 import useChat from './hooks/useChat';
+import { PROVIDERS } from './data/providers.js';
 
 export default function App() {
-  const [darkMode,     setDarkMode]     = useState(true);
-  const [sidebarOpen,  setSidebarOpen]  = useState(true);
-  const [platform,     setPlatform]     = useState('Instagram');
-  const [tone,         setTone]         = useState('Professional');
-  const [provider,     setProvider]     = useState('OpenAI');
-  const [apiKey,       setApiKey]       = useState('');
+  const [darkMode,    setDarkMode]    = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [platform,    setPlatform]    = useState('Instagram');
+  const [tone,        setTone]        = useState('Professional');
+  const [provider,    setProvider]    = useState('Groq');
+  const [model,       setModel]       = useState(PROVIDERS['Groq'].models[0]);
+  const [apiKey,      setApiKey]      = useState('');
 
   const {
     chats, activeChatId, messages, isLoading,
@@ -18,11 +20,11 @@ export default function App() {
   } = useChat();
 
   const handleSend = topic => {
-    sendMessage(topic, platform, tone, provider, apiKey);
+    sendMessage(topic, platform, tone, provider, model, apiKey);
   };
 
   const handleRegenerate = () => {
-    regenerateLast(platform, tone, provider, apiKey);
+    regenerateLast(platform, tone, provider, model, apiKey);
   };
 
   return (
@@ -55,10 +57,12 @@ export default function App() {
             platform={platform}
             tone={tone}
             provider={provider}
+            model={model}
             apiKey={apiKey}
             onPlatformChange={setPlatform}
             onToneChange={setTone}
             onProviderChange={setProvider}
+            onModelChange={setModel}
             onApiKeyChange={setApiKey}
           />
         </div>
